@@ -1,0 +1,98 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "email_service API",
+        "description": "email_service only serve email",
+        "version": "1.0.0",
+        "termsOfService": "http://beego.me/",
+        "contact": {
+            "email": "qsg@corex-tek.com"
+        },
+        "license": {
+            "name": "Url http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/v1",
+    "paths": {
+        "/email/send/": {
+            "post": {
+                "tags": [
+                    "email"
+                ],
+                "description": "send emails",
+                "operationId": "EmailController.Send",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for email content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Email"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/Response"
+                        }
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Email": {
+            "title": "Email",
+            "type": "object",
+            "properties": {
+                "body": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                }
+            }
+        },
+        "Response": {
+            "title": "Response",
+            "type": "object",
+            "properties": {
+                "Reason": {
+                    "type": "string"
+                },
+                "Result": {
+                    "type": "string"
+                },
+                "RetryCount": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Status": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "email",
+            "description": "Operations about Email\n"
+        }
+    ]
+}
